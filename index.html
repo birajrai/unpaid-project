@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Website Status</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome 7 -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+
+        <!-- Motion One -->
+        <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            en: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                            np: ['Mukta', 'system-ui', 'sans-serif'],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+
+    <body
+        class="min-h-screen font-en bg-gradient-to-br from-sky-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-100 transition-colors"
+    >
+        <main class="min-h-screen flex items-center justify-center px-4">
+            <div class="max-w-xl w-full">
+                <!-- Card -->
+                <div
+                    id="card"
+                    class="bg-white/90 dark:bg-slate-900/90 backdrop-blur border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-8 text-center"
+                >
+                    <!-- Top bar -->
+                    <div class="flex justify-between items-center mb-6">
+                        <!-- Language -->
+                        <div class="flex gap-2 text-sm">
+                            <button
+                                onclick="setLang('en')"
+                                class="lang-btn px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
+                            >
+                                🇺🇸 EN
+                            </button>
+                            <button
+                                onclick="setLang('np')"
+                                class="lang-btn px-3 py-1 rounded-full border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
+                            >
+                                🇳🇵 NP
+                            </button>
+                        </div>
+
+                        <!-- Theme -->
+                        <button
+                            onclick="toggleDark()"
+                            class="theme-btn p-2 rounded-full border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
+                        >
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </div>
+
+                    <!-- Icon -->
+                    <div class="flex justify-center mb-5">
+                        <div
+                            id="icon"
+                            class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
+                        >
+                            <i class="fa-solid fa-circle-pause text-blue-600 dark:text-blue-400 text-4xl"></i>
+                        </div>
+                    </div>
+
+                    <!-- English -->
+                    <div id="lang-en">
+                        <h1 class="text-2xl font-semibold mb-3">Website Temporarily Paused</h1>
+
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                            This website is currently paused while the payment process is being completed. Once
+                            everything is settled, the site will be made available promptly.
+                        </p>
+
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
+                            For assistance or payment confirmation, please contact:
+                        </p>
+                    </div>
+
+                    <!-- Nepali -->
+                    <div id="lang-np" class="hidden">
+                        <h1 class="text-2xl font-semibold mb-3">वेबसाइट अस्थायी रूपमा रोकिएको छ</h1>
+
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                            भुक्तानी प्रक्रिया पूरा हुन बाँकी रहेको कारण यो वेबसाइट हाल अस्थायी रूपमा रोकिएको छ।
+                            भुक्तानी सम्पन्न भएपछि वेबसाइट तुरुन्तै उपलब्ध हुनेछ।
+                        </p>
+
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
+                            थप जानकारी वा भुक्तानी पुष्टि गर्न सम्पर्क गर्नुहोस्:
+                        </p>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="flex justify-center items-center gap-2 text-lg font-medium">
+                        <i class="fa-solid fa-phone text-slate-400"></i>
+                        <a href="tel:+9779745690471" class="hover:text-blue-600 dark:hover:text-blue-400 transition">
+                            +977-9745690471
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <p class="text-center text-xs text-slate-400 mt-6">
+                    © <span id="year"></span> • Thank you for your understanding
+                </p>
+            </div>
+        </main>
+
+        <script>
+            const { animate } = motion;
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Entrance animations
+            animate('#card', { opacity: [0, 1], y: [24, 0] }, { duration: 0.6, easing: 'ease-out' });
+            animate('#icon', { scale: [0.85, 1] }, { duration: 0.5, delay: 0.2, easing: 'ease-out' });
+
+            // Button micro-interactions
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    animate(btn, { scale: 1.05 }, { duration: 0.15 });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    animate(btn, { scale: 1 }, { duration: 0.15 });
+                });
+            });
+
+            function toggleDark() {
+                document.documentElement.classList.toggle('dark');
+            }
+
+            function setLang(lang) {
+                const body = document.body;
+                document.getElementById('lang-en').classList.toggle('hidden', lang !== 'en');
+                document.getElementById('lang-np').classList.toggle('hidden', lang !== 'np');
+                body.classList.toggle('font-en', lang === 'en');
+                body.classList.toggle('font-np', lang === 'np');
+            }
+        </script>
+    </body>
+</html>
